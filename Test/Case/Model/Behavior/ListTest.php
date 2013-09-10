@@ -33,7 +33,7 @@ class UsersAddon extends CakeTestModel {
  * 
  * @return boolean
  */
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		return $this->beforeSaveFalse;
 	}
 

@@ -91,7 +91,7 @@ class SerializableBehavior extends ModelBehavior {
  * @param array $options
  * @return void
  */
-	public function afterSave(Model$Model, $created, $options = array()) {
+	public function afterSave(Model $Model, $created, $options = array()) {
 		if(!empty($options['deserialize'])) $Model->data = $Model->deserialize($Model->data);
 	}
 

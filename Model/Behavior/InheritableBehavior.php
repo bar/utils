@@ -94,7 +94,7 @@ class InheritableBehavior extends ModelBehavior {
  * @param boolean $primary
  * @return array Results
  */
-	public function afterFind(Model $Model, $results = array(), $primary = false) {
+	public function afterFind(Model $Model, $results, $primary = false) {
 		if ($this->settings[$Model->alias] !== 'STI' && !empty($results)) {
 			foreach ($results as $i => $res) {
 				if (is_int($i)) {
@@ -137,7 +137,7 @@ class InheritableBehavior extends ModelBehavior {
  * @param Model $Model
  * @return true
  */
-	public function beforeSave(Model $Model) {
+	public function beforeSave(Model $Model, $options = array()) {
 		if ($this->settings[$Model->alias]['method'] == 'STI') {
 			$this->_singleTableBeforeSave($Model);
 		} elseif ($this->settings[$Model->alias]['method'] == 'CTI') {
@@ -168,7 +168,7 @@ class InheritableBehavior extends ModelBehavior {
  * @param Model $model
  * @return true
  */
-	public function beforeValidate(Model $Model) {
+	public function beforeValidate(Model $Model, $options = array()) {
 		if ($this->settings[$Model->alias]['method'] == 'CTI' && !empty($Model->parent->validate)) {
 			$Model->validate = Set::merge($Model->parent->validate, $Model->validate);
 		}
